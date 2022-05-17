@@ -35,6 +35,7 @@ class _EnterScreenState extends State<EnterScreen> {
               textAlign: TextAlign.center,
             ),
             DropdownButton<int?>(
+                hint: const Text('Choose a City'),
                 value: _dropdownValue,
                 items: const [
                   DropdownMenuItem(
@@ -51,9 +52,10 @@ class _EnterScreenState extends State<EnterScreen> {
                 ],
                 onChanged: _dropdownCallback),
             ElevatedButton(
-                onPressed: () =>
-                    Navigator.pushNamed(context, HomeScreen.routeName),
-                child: Text('Continue'))
+                onPressed: _dropdownValue != null
+                    ? () => Navigator.pushNamed(context, HomeScreen.routeName)
+                    : null,
+                child: const Text('Continue'))
           ],
         ),
       ),
