@@ -3,22 +3,22 @@ import 'package:city_guide_app/providers/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EventsScreen extends ConsumerStatefulWidget {
-  const EventsScreen({Key? key}) : super(key: key);
+class SleepScreen extends ConsumerStatefulWidget {
+  const SleepScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _EventsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SleepScreenState();
 }
 
-class _EventsScreenState extends ConsumerState<EventsScreen> {
+class _SleepScreenState extends ConsumerState<SleepScreen> {
   @override
   Widget build(BuildContext context) {
-    var events = ref.watch(events_provider);
+    var sleeps = ref.watch(accomodation_provider);
     return Padding(
       padding: EdgeInsets.all(8),
       child: ListView.separated(
           itemBuilder: ((ctx, i) {
-            var item = events[i];
+            var item = sleeps[i];
             return Card(
               child: ItemCard(
                 title: item.name,
@@ -31,7 +31,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
             );
           }),
           separatorBuilder: (ctx, i) => Divider(),
-          itemCount: events.length),
+          itemCount: sleeps.length),
     );
   }
 }

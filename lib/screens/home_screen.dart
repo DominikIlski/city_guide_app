@@ -1,3 +1,7 @@
+import 'package:city_guide_app/screens/events_screen.dart';
+import 'package:city_guide_app/screens/guide_screen.dart';
+import 'package:city_guide_app/screens/places_screen.dart';
+import 'package:city_guide_app/screens/sleep_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,10 +21,18 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  final _pages = <Widget>[
+    const EventsScreen(),
+    PlacesScreen(),
+    SleepScreen(),
+    GuideScreen()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: const Text('Home')),
+      body: IndexedStack(children: _pages,
+      index: _selectedItem,),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedItem,
           onTap: _barCallback,

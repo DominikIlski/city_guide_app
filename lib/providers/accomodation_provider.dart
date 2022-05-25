@@ -7,27 +7,25 @@ import 'package:uuid/uuid.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../utils/utils.dart';
 
-part 'event_provider.g.dart';
+part 'accomodation_provider.g.dart';
 
 const _uuid = Uuid();
-
 
 @immutable
 @JsonSerializable()
 @LatLngConverter()
-class Event extends BaseInfo {
-  const Event(String name, String description, LatLng place,
+class Accomodation extends BaseInfo {
+  const Accomodation(String name, String description, LatLng place,
       List<String> images, String id)
       : super(name, description, place, images, id: id);
-  factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
-  
+  factory Accomodation.fromJson(Map<String, dynamic> json) =>
+      _$AccomodationFromJson(json);
+
   @override
-  Icon get typeIcon => Icon(Icons.event_note_outlined);
-
-
+  Icon get typeIcon => Icon(Icons.hotel_outlined);
 }
 
-
-class EventsNotifier extends StateNotifier<List<Event>> {
-  EventsNotifier([List<Event>? initialEvents]) : super(initialEvents ?? []);
+class AccomodationNotifier extends StateNotifier<List<Accomodation>> {
+  AccomodationNotifier([List<Accomodation>? initialEvents])
+      : super(initialEvents ?? []);
 }
