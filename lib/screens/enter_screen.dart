@@ -1,14 +1,16 @@
+import 'package:city_guide_app/providers/provider.dart';
 import 'package:city_guide_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EnterScreen extends StatefulWidget {
+class EnterScreen extends ConsumerStatefulWidget {
   const EnterScreen({Key? key}) : super(key: key);
 
   @override
-  State<EnterScreen> createState() => _EnterScreenState();
+  ConsumerState<EnterScreen> createState() => _EnterScreenState();
 }
 
-class _EnterScreenState extends State<EnterScreen> {
+class _EnterScreenState extends ConsumerState<EnterScreen> {
   int? _dropdownValue;
 
   void _dropdownCallback(int? selected) {
@@ -53,9 +55,12 @@ class _EnterScreenState extends State<EnterScreen> {
                 onChanged: _dropdownCallback),
             ElevatedButton(
                 onPressed: _dropdownValue != null
-                    ? () => Navigator.pushNamed(context, HomeScreen.routeName)
+                    ? () {
+                      ref.watch(auth).signInAnonymously();
+                      Navigator.pushNamed(context, HomeScreen.routeName);
+                    }
                     : null,
-                child: const Text('Continue'))
+                child: const Text('Log in and Continue...'))
           ],
         ),
       ),
