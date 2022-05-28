@@ -20,12 +20,14 @@ dependencies:
     sdk: flutter
   flutter_rating_bar: ^4.0.1
   flutter_riverpod: ^1.0.3
+  flutter_tts: ^3.3.3
   geolocator: ^8.2.1
   google_maps_flutter: ^2.1.5
   json_annotation: ^4.5.0
   location: ^4.4.0
   shared_preferences: ^2.0.15
   uuid: ^3.0.6
+  youtube_player_flutter: ^8.1.0
 
   
 dev_dependencies:

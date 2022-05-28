@@ -24,7 +24,7 @@ class _SleepScreenState extends ConsumerState<SleepScreen> {
                 title: item.name,
                 desc: item.description,
                 image: item.images[0],
-                type: Icon(Icons.event_note_outlined),
+                type: Icon(Icons.hotel_outlined),
                 item: item,
                 key: Key(i.toString()),
               ),

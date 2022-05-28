@@ -1,18 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:city_guide_app/models/base_info.dart';
 import 'package:city_guide_app/screens/description_screen.dart';
+import 'package:city_guide_app/screens/guide_desc_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ItemCard extends ConsumerWidget {
+import '../providers/guide_provider.dart';
+
+class GuideCard extends ConsumerWidget {
   final String title;
   final String desc;
-  final Icon type;
   final String image;
-  final BaseInfo item;
-  const ItemCard(
+  final Guide item;
+  const GuideCard(
       {required this.title,
-      required this.type,
       required this.image,
       required this.desc,
       required this.item,
@@ -25,7 +26,7 @@ class ItemCard extends ConsumerWidget {
       height: 80,
       child: GestureDetector(
         onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => DescriptionScreen(item))),
+            MaterialPageRoute(builder: (context) => GuideDescScreen(item))),
         child: Card(
             child: Row(
           mainAxisSize: MainAxisSize.max,
@@ -58,10 +59,6 @@ class ItemCard extends ConsumerWidget {
                         ))
                   ]),
             ),
-            Flexible(
-                child: Center(
-              child: type,
-            ))
           ],
         )),
       ),

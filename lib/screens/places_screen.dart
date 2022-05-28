@@ -1,18 +1,24 @@
 import 'dart:async';
 
+import 'package:city_guide_app/data/dummy_data.dart';
+import 'package:city_guide_app/providers/provider.dart';
+import 'package:city_guide_app/screens/description_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-class PlacesScreen extends StatefulWidget {
+import '../providers/places_provider.dart';
+
+class PlacesScreen extends ConsumerStatefulWidget {
   PlacesScreen({Key? key}) : super(key: key);
 
   @override
-  State<PlacesScreen> createState() => _PlacesScreenState();
+  ConsumerState<PlacesScreen> createState() => _PlacesScreenState();
 }
 
-class _PlacesScreenState extends State<PlacesScreen> {
+class _PlacesScreenState extends ConsumerState<PlacesScreen> {
   Completer<GoogleMapController> _controller = Completer();
 
   var _initialPosition = CameraPosition(
@@ -25,7 +31,18 @@ class _PlacesScreenState extends State<PlacesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var markers = ref
+        .watch(places_provider)
+        .map((e) => Marker(
+            markerId: MarkerId(e.id),
+            position: e.place,
+            infoWindow: InfoWindow(
+                title: e.name,
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DescriptionScreen(e))))))
+        .toSet();
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () => setState(() {
           _getCurrentPosition();
@@ -33,6 +50,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
         child: Icon(Icons.location_on),
       ),
       body: GoogleMap(
+        markers: markers,
         initialCameraPosition: _initialPosition,
         mapType: MapType.normal,
         onMapCreated: (controller) {

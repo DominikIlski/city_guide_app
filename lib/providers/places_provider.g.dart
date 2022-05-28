@@ -12,6 +12,7 @@ Place _$PlaceFromJson(Map<String, dynamic> json) => Place(
       const LatLngConverter().fromJson(json['place'] as Map<String, dynamic>),
       (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       json['id'] as String,
+      json['video'] as String,
     );
 
 Map<String, dynamic> _$PlaceToJson(Place instance) => <String, dynamic>{
@@ -20,4 +21,5 @@ Map<String, dynamic> _$PlaceToJson(Place instance) => <String, dynamic>{
       'description': instance.description,
       'place': const LatLngConverter().toJson(instance.place),
       'images': instance.images,
+      'video': instance.video,
     };
